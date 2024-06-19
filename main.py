@@ -2,16 +2,6 @@ import os
 import locale
 import time
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
 from urllib.parse import urlparse
 
 import subprocess
@@ -49,6 +39,8 @@ for i in range(len(link_list)):
 
     #Start download
     #command = 'yt-dlp ' + '\'' + network_requests + '\' -o \'' + path + str((i+1)) + '.mp4\''
-    command = 'yt-dlp "' + link_list[i] + '" -o "' + path + str((i+1)) + '.mp4"'
+    command = 'yt-dlp -r 1500K --fragment-retries infinite "' + link_list[i].strip() + '" -o "' + path + str((i+27)) + '.mp4"'
+    #command = ' ffmpeg -i "' + strip(link_list[i]) + '" -c copy ' + path + str((i+1)) + '.mp4'
+    print(command)
     process = subprocess.Popen(command, shell=True).wait()
     print("Finish")
